@@ -10,7 +10,7 @@ namespace BattleShips
         public Cruiser Cruiser { get; set; }
         public Destroyer Destroyer1 { get; set; }
         public Destroyer Destroyer2 { get; set; }
-        public List<Ship> Ships => new List<Ship> { Carrier, Battleship, Cruiser, Destroyer1, Destroyer2 };
+        public List<Ship> Ships { get; set; }
         
         public GameBoard()
         {
@@ -20,13 +20,16 @@ namespace BattleShips
             Cruiser = new Cruiser();
             Destroyer1 = new Destroyer();
             Destroyer2 = new Destroyer();
+            Ships = new List<Ship>() { Carrier, Battleship, Cruiser, Destroyer1, Destroyer2 };
         }
 
         
 
         public void PrintBoard()
         {
-            //Console.Clear();
+            Console.Clear();
+            Console.WriteLine("PLASSER SKIPENE DINE!");
+            Console.WriteLine();
             Console.WriteLine(
                 "    1   2   3   4   5   6   7   8   9\n  ╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗");
             for (var i = 0; i < Board.GetLength(0); i++)
@@ -110,11 +113,7 @@ namespace BattleShips
             int[] Value = new int[] { rowIndex, lineIndex };
             return Value;
         }
-        public void MarkHitt(string shoot)
-        {
-            int[] indexes = TranslatCords(shoot);
-            if (Board[indexes[0], indexes[1]] != null) { Board[indexes[0], indexes[1]].DisplayValue = "X"; }
-        }
+       
 
         private bool arePositionsFree(int[] startPositionIndex, int[] endPosition, string direction)
         {
