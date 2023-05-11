@@ -2,7 +2,7 @@
 {
     internal class Battleship : Ship
     {
-        public Battleship() :base (3, "Slagskip")
+        public Battleship() :base (3, "Slagskip", "S")
         {
         }
     }

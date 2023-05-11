@@ -2,7 +2,7 @@
 {
     internal class Destroyer : Ship
     {
-        public Destroyer() : base(1, "Jager")
+        public Destroyer() : base(1, "Jager", "J")
         {
         }
     }

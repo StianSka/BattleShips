@@ -2,7 +2,7 @@
 {
     internal class Cruiser : Ship
     {
-        public Cruiser() : base(2, "Krysser")
+        public Cruiser() : base(2, "Krysser", "K")
         {          
         }
     }

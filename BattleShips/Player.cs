@@ -25,6 +25,48 @@
             Board.PlaceShip(this);
         }
 
+        public void HideShips()
+        {
+            //loop gjenom cpu ship og endre display value til hidden eller noe 
+        }
+        public void PlayerShoot(GameBoard board)
+        {
+            bool isValid = false;
+            string shoot = "";
+            while (!isValid)
+            {
+                string current = ValidShootInput();
+                isValid = CheckShoot(current);
+                if (isValid) { CordsShoot.Add(current); }
+                shoot = current;
+            }
+            board.MarkHitt(shoot);
+        }
+        public string ValidShootInput()
+        {
+            bool isValid = false;
+            string input = "";
+            int[] indexes;
+            while (!isValid)
+            {
+                Console.Clear();
+                Board.PrintBoard();
+                Console.WriteLine("Skriv en kordinatene til ruten du vil skyte");
+                input = Console.ReadLine();
+                indexes = Board.TranslatCords(input);
+                isValid = CheckCords(indexes);
+            }
+            return input;
+        }
+        public bool CheckCords(int[] indexes)
+        {
+            bool isValid = false;
+            if (indexes[0] >= 0 && indexes[1] >= 0 && indexes[0] <= 9 && indexes[1] <= 9)
+            {
+                isValid = true;
+            }
+            return isValid;
+        }
         public void CPUShoot(GameBoard board)
         {
             bool isValid = false;

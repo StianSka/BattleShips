@@ -2,7 +2,7 @@
 {
     internal class Carrier : Ship
     {
-        public Carrier() : base(4, "Hangarskip")
+        public Carrier() : base(4, "Hangarskip", "H")
         {          
         }
     }

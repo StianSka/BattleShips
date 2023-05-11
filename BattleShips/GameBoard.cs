@@ -36,6 +36,7 @@ namespace BattleShips
                 for (var j = 0; j < Board.GetLength(1); j++)
                 {
                     var value = GetDisplayValue(i, j);
+                    
                     if (j < 8)
                     {
                         Console.Write($" {value} │");
@@ -57,19 +58,22 @@ namespace BattleShips
 
         public string GetDisplayValue(int y, int x)
         {
-            switch (Board[y, x]?.Name)
+            switch (Board[y, x]?.DisplayValue)
             {
-                case "Slagskip":
+                case "S":
                     return ("S");
 
-                case "Hangarskip":
+                case "H":
                     return ("H");
 
-                case "Krysser":
+                case "K":
                     return ("K");
 
-                case "Jager":
+                case "J":
                     return ("J");
+
+                case "X":
+                    return ("X");
 
                 default:
                     return (" ");
@@ -109,7 +113,7 @@ namespace BattleShips
         public void MarkHitt(string shoot)
         {
             int[] indexes = TranslatCords(shoot);
-
+            if (Board[indexes[0], indexes[1]] != null) { Board[indexes[0], indexes[1]].DisplayValue = "X"; }
         }
 
         private bool arePositionsFree(int[] startPositionIndex, int[] endPosition, string direction)

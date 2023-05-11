@@ -17,14 +17,16 @@
             Player.ShowBoard();
             CPU.PlaceShips();
             Player.PlaceShips();
-            
-            while (!GameOver)
-            {
-                if (isPlayersTurn) Player.Attack(CPU.Board);
-                else CPU.CPUShoot(Player.Board);
-            }
+            //while (!GameOver)
+            //{
+            //CPU.CPUShoot(Player.Board);
+            //Player.ShowBoard();
+            //Player.PlayerShoot(CPU.Board);
+            //Player.ShowBoard();
+            // check if victor maybe needs to happen after every shoot 
+            //}
         }
-        
+
         public static int RandomNummber(int min, int max)
         {
             Random random = new Random();
