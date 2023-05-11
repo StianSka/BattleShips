@@ -2,7 +2,7 @@
 {
     internal class Player
     {
-        public List<string> CordsShoot { get; set; }
+        public string[,] CordsShoot { get; set; }
         public bool IsPlayer { get; set; }
         public GameBoard ShipBoard { get; set; }
         public List<string> HasShoot { get; set; }
@@ -11,8 +11,7 @@
         {
             IsPlayer = isplayer;
             ShipBoard = new GameBoard();
-            HasShoot = new List<string>();
-            CordsShoot = new List<string>();
+            CordsShoot = new string[9, 9];
         }
 
         public void ShowBoard()
@@ -25,35 +24,34 @@
             ShipBoard.PlaceShip(this);
         }
 
-        public void PlayerShoot(GameBoard board)
+        public void PlayerShoot()
         {
             bool isValid = false;
-            string shoot = "";
             while (!isValid)
             {
-                string current = ValidShootInput();
+                int[] current = ValidShootInput();
                 isValid = CheckShoot(current);
-                if (isValid) { CordsShoot.Add(current); }
-                shoot = current;
+                if (isValid) CordsShoot[current[0], current[1]] = "X";
             }
-            board.MarkHitt(shoot);
+
         }
-        public string ValidShootInput()
+
+        public int[] ValidShootInput()
         {
             bool isValid = false;
             string input = "";
-            int[] indexes;
+            int[] indexes = null;
             while (!isValid)
             {
-                Console.Clear();
-                ShipBoard.PrintBoard();
+                
                 Console.WriteLine("Skriv en kordinatene til ruten du vil skyte");
                 input = Console.ReadLine();
                 indexes = ShipBoard.TranslatCords(input);
                 isValid = CheckCords(indexes);
             }
-            return input;
+            return indexes;
         }
+
         public bool CheckCords(int[] indexes)
         {
             bool isValid = false;
@@ -63,41 +61,28 @@
             }
             return isValid;
         }
+
         public void CPUShoot(GameBoard board)
         {
-            bool isValid = false;   
-            string shoot = "";
-            while (!isValid) 
+            bool isValid = false;
+            while (!isValid)
             {
-                string  current = GetShootPossision();
+                int[] current = GetShootPossision();
                 isValid = CheckShoot(current);
-                if (isValid) { CordsShoot.Add(current); }
-                shoot = current;
+                if (isValid) CordsShoot[current[0], current[1]] = "X";
             }
-            board.MarkHitt(shoot);
         }
-        public bool CheckShoot(string current)
+
+        public bool CheckShoot(int[] current)
         {
-            for (int i = 0; i < CordsShoot.Count; i++)
-            {
-                if (CordsShoot[i] == current)
-                {
-                    return false;
-                }
-            }
-            return true;
+            return CordsShoot[current[0], current[1]] == null;
         }
-        private string GetShootPossision()
+
+        private int[] GetShootPossision()
         {
-            var letters = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i" };
-            var verticalPosition = Game.RandomNummber(0, 9);
-            var horizontalPosition = Game.RandomNummber(1, 10);
-            var letter = letters[verticalPosition];
-            var position = letter + horizontalPosition;
-            return position;
+         var verticalPosition = Game.RandomNummber(0, 9);
+         var horizontalPosition = Game.RandomNummber(0, 9);
+         return new [] { verticalPosition, horizontalPosition };
         }
-
-
-
     }
 }
