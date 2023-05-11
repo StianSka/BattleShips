@@ -4,25 +4,25 @@
     {
         public List<string> CordsShoot { get; set; }
         public bool IsPlayer { get; set; }
-        public GameBoard Board { get; set; }
+        public GameBoard ShipBoard { get; set; }
         public List<string> HasShoot { get; set; }
-        public bool HasLost => Board.Ships.All(s => s.IsSunk);
+        public bool HasLost => ShipBoard.Ships.All(s => s.IsSunk);
         public Player(bool isplayer)
         {
             IsPlayer = isplayer;
-            Board = new GameBoard();
+            ShipBoard = new GameBoard();
             HasShoot = new List<string>();
             CordsShoot = new List<string>();
         }
 
         public void ShowBoard()
         {
-            Board.PrintBoard();
+            ShipBoard.PrintBoard();
         }
 
         public void PlaceShips()
         {
-            Board.PlaceShip(this);
+            ShipBoard.PlaceShip(this);
         }
 
         public void PlayerShoot(GameBoard board)
@@ -46,10 +46,10 @@
             while (!isValid)
             {
                 Console.Clear();
-                Board.PrintBoard();
+                ShipBoard.PrintBoard();
                 Console.WriteLine("Skriv en kordinatene til ruten du vil skyte");
                 input = Console.ReadLine();
-                indexes = Board.TranslatCords(input);
+                indexes = ShipBoard.TranslatCords(input);
                 isValid = CheckCords(indexes);
             }
             return input;
