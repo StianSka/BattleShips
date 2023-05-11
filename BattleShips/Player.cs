@@ -25,10 +25,6 @@
             Board.PlaceShip(this);
         }
 
-        public void HideShips()
-        {
-            //loop gjenom cpu ship og endre display value til hidden eller noe 
-        }
         public void PlayerShoot(GameBoard board)
         {
             bool isValid = false;
@@ -69,7 +65,7 @@
         }
         public void CPUShoot(GameBoard board)
         {
-            bool isValid = false;
+            bool isValid = false;   
             string shoot = "";
             while (!isValid) 
             {
